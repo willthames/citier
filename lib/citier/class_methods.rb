@@ -2,6 +2,7 @@ module Citier
   module ClassMethods
     # any method placed here will apply to classes
     def acts_as_citier(options = {})
+      set_acts_as_citier(true)
 
       # Option for setting the inheritance columns, default value = 'type'
       db_type_field = (options[:db_type_field] || :type).to_s
@@ -25,32 +26,21 @@ module Citier
         # The the Writable. References the write-able table for the class because
         # save operations etc can't take place on the views
         self.const_set("Writable", create_class_writable(self))
+        
+        after_initialize do
+          self.id = nil if self.new_record? && self.id == 0
+        end
 
         # Add the functions required for children only
         send :include, Citier::ChildInstanceMethods
       else
       # Root class
 
-        after_save :updatetype
-
         citier_debug("Root Class")
 
         set_table_name "#{table_name}"
 
         citier_debug("table_name -> #{self.table_name}")
-
-        def self.find(*args) #overrides find to get all attributes
-
-          tuples = super
-
-          # in case of many objects, return an array of them, reloaded to pull in inherited attributes
-          return tuples.map{|x| x.reload} if tuples.kind_of?(Array)
-
-          # in case of only one tuple, return it reloaded.
-          # Can't use reload as would loop inifinitely, so do a search by id instead.
-          # Probably a nice way of cleaning this a bit
-          return tuples.class.where(tuples.class[:id].eq(tuples.id))[0]
-        end
 
         # Add the functions required for root classes only
         send :include, Citier::RootInstanceMethods
