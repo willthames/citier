@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{citier}
-  s.version = "0.1.13"
+  s.version = "0.1.14"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Peter Hamilton, Originally from Laurent Buffat, Pierre-Emmanuel Jouve"]
@@ -18,7 +18,8 @@ Gem::Specification.new do |s|
     "lib/citier/instance_methods.rb",
     "lib/citier/child_instance_methods.rb",
     "lib/citier/root_instance_methods.rb",
-    "lib/citier/sql_adapters.rb"]
+    "lib/citier/sql_adapters.rb",
+    "lib/citier/relation_methods.rb"]
   s.files = ["Rakefile",
     "lib/citier.rb",
     "lib/citier/acts_as_citier.rb",
@@ -28,6 +29,7 @@ Gem::Specification.new do |s|
     "lib/citier/child_instance_methods.rb",
     "lib/citier/root_instance_methods.rb",
     "lib/citier/sql_adapters.rb",
+    "lib/citier/relation_methods.rb",
     "Manifest",
     "citier.gemspec"]
   s.homepage = %q{https://github.com/peterhamilton/citier/}

@@ -7,4 +7,5 @@ lib/citier/core_ext.rb
 lib/citier/instance_methods.rb
 lib/citier/root_instance_methods.rb
 lib/citier/sql_adapters.rb
+lib/citier/relation_methods.rb
 Manifest
