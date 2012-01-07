@@ -16,7 +16,7 @@ begin
     module ConnectionAdapters
       class SQLiteAdapter < AbstractAdapter
 
-        def tables(name = nil) 
+        def tables(name = 'SCHEMA', table_name = nil)
           sql = <<-SQL
           SELECT name
           FROM sqlite_master
@@ -25,6 +25,7 @@ begin
           # Modification : the where clause was intially WHERE type = 'table' AND NOT name = 'sqlite_sequence' 
           #                now it is WHERE (type = 'table' or type='view') AND NOT name = 'sqlite_sequence'
           # this modification is made to consider tables AND VIEWS as tables
+          sql << " AND name = #{quote_table_name(table_name)}" if table_name
 
           execute(sql, name).map do |row|
             row['name']
