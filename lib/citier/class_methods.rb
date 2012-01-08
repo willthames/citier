@@ -10,7 +10,7 @@ module Citier
       #:table_name = option for setting the name of the current class table_name, default value = 'tableized(current class name)'
       table_name = (options[:table_name] || self.name.tableize.gsub(/\//,'_')).to_s
 
-      set_inheritance_column "#{db_type_field}"
+      self.inheritance_column = "#{db_type_field}"
 
       if(self.superclass!=ActiveRecord::Base)
         # Non root-class
@@ -38,7 +38,7 @@ module Citier
 
         citier_debug("Root Class")
 
-        set_table_name "#{table_name}"
+        self.table_name = "#{table_name}"
 
         citier_debug("table_name -> #{self.table_name}")
 
