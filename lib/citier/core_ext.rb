@@ -29,7 +29,7 @@ class ActiveRecord::Base
 
       # set the name of the table associated to this class
       # this class will be associated to the writable table of the class_reference class
-      set_table_name(t_name)
+      self.table_name = t_name
     end
   end
 end

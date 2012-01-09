@@ -19,7 +19,7 @@ module Citier
         citier_debug("table_name -> #{table_name}")
 
         # Set up the table which contains ALL attributes we want for this class
-        set_table_name "view_#{table_name}"
+        self.table_name = "view_#{table_name}"
 
         citier_debug("tablename (view) -> #{self.table_name}")
 
